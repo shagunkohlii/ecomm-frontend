@@ -1,0 +1,31 @@
+.homepage{
+    border: 2px solid black;
+    padding: 40px;
+}
+.filter-box{
+    display: flex;
+    justify-content: space-around;
+}
+button{
+    /* height: 4rem;
+    width: 4rem; */
+    font-size: 2rem;
+    padding: 4px;
+    color: white;
+    background-color: rgb(91, 91, 100);
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+.home-h1{
+    font-size: 7rem;
+    width: 50%;
+    /* height: 50%; */
+}
+img{
+    width: 50%;
+    height: 800px;
+}
+.homepage{
+    display: flex;
+    justify-content: space-around;
+}
