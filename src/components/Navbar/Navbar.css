@@ -1,22 +1,84 @@
-.nav{
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .navbar-logo {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    font-size: 2rem;
-    background-color: white;
-    box-shadow: 2px 2px 2px grey;
-    padding: 2px;
-}
-.right{
+    text-decoration: none;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+  
+  .cartify-logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 0.5rem;
+  }
+  
+  .navbar-menu {
     display: flex;
-}
-.avatar{
-    margin-left: 15px;
-}
-input{
-    height: 2rem;
-    font-size: 1.2rem;
-    border: 2px solid rgb(199, 195, 195);
-    border-radius: 10px;
-    text-align: center;
-}
+    align-items: center;
+  }
+  
+  .cart-icon {
+    margin-right: 1rem;
+  }
+  
+  .cart-icon img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .menu-icon {
+    display: none;
+    cursor: pointer;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .navbar-container {
+      padding: 1rem;
+    }
+  
+    .navbar-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: #ffffff;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: none;
+    }
+  
+    .navbar-menu.active {
+      display: flex;
+    }
+  
+    .cart-icon {
+      margin: 1rem 0;
+    }
+  
+    .menu-icon {
+      display: block;
+    }
+  }
