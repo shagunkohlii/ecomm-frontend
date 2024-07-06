@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 const Login = () => {
@@ -7,6 +7,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,41 +17,45 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = async () => {
-    console.log("User Signed up", formData);
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+    console.log("User logging in", formData);
     try {
-      const response = await fetch("http://localhost:5000/api/user/login", {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/api/user/login`, {
         method: "POST",
         headers: {
-          Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       const responseData = await response.json();
-      console.log(responseData.token);
 
       if (response.ok && responseData.token) {
         localStorage.setItem("token", responseData.token);
-        window.location.replace("/");
-        console.log("inside if");
-        alert("User login");  
+        console.log("Login successful");
+        // Use navigate instead of window.location.replace
+        navigate("/");
+        // If you're using a toast library:
+        // toast.success("Login successful!");
       } else {
-        alert(responseData.error);
+        const errorMessage = responseData.error || "Login failed. Please try again.";
+        console.log(errorMessage);
+        // If you're using a toast library:
+        // toast.error(errorMessage);
       }
     } catch (error) {
-      alert(error);
-      console.log(error, "frontend me signup me error");
+      console.error("Error during login:", error);
+      // If you're using a toast library:
+      // toast.error("An unexpected error occurred. Please try again later.");
     }
   };
-
 
   return (
     <div className="login-container">
       <div className="login-box">
         <h1 className="login-title">Login</h1>
-        <form className="login-form">
+        <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
             <input
@@ -75,7 +80,7 @@ const Login = () => {
               required
             />
           </div>
-          <button type="submit" className="login-button" onClick={handleSubmit}>
+          <button type="submit" className="login-button">
             Login
           </button>
         </form>

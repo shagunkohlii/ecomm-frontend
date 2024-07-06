@@ -20,7 +20,7 @@ const ShopContextProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/cart/removeItem",
+        `${process.env.REACT_APP_BASE_URL}/api/cart/removeItem`,
         { itemId },
         { headers: { token } }
       );
@@ -50,7 +50,7 @@ const ShopContextProvider = ({ children }) => {
 
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/cart/getUserCart",
+      `${process.env.REACT_APP_BASE_URL}/api/cart/getUserCart`,
         {
           headers: {
             token: token,
@@ -103,7 +103,7 @@ const ShopContextProvider = ({ children }) => {
     });
 
     if (localStorage.getItem("token")) {
-      fetch("http://localhost:5000/api/cart/addToCart", {
+      fetch(`${process.env.REACT_APP_BASE_URL}/api/cart/addToCart`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -126,7 +126,7 @@ const ShopContextProvider = ({ children }) => {
     if (localStorage.getItem("token")) {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/cart/removeFromCart",
+          `${process.env.REACT_APP_BASE_URL}/api/cart/removeFromCart`,
           {
             method: "POST",
             headers: {
@@ -184,8 +184,9 @@ const ShopContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        console.log(process.env.REACT_APP_BASE_URL)
         const response = await axios.get(
-          "http://localhost:5000/api/product/getproducts"
+          `${process.env.REACT_APP_BASE_URL}/api/product/getproducts`
         );
         setProducts(response.data);
         setFilteredProducts(response.data);

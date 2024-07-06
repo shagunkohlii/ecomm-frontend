@@ -14,6 +14,7 @@ const Allproducts = () => {
     popupMessage,
     showPopupWithMessage,
   } = useContext(ShopContext);
+  console.log(filteredProducts)
 
   // console.log(products);
   const [popup, setPopup] = useState(false);
