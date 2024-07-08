@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "./Signup.css";
 
 const Signup = () => {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -17,7 +18,8 @@ const Signup = () => {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     console.log("User Signed up", formData);
     try {
       const response = await fetch(
@@ -37,7 +39,7 @@ const Signup = () => {
 
       if (responseData) {
         // localStorage.setItem("Auth-token", responseData.token);
-        window.location.replace("/Login");
+        navigate("/Login");
         alert("User created");
       } else {
         alert(responseData.error);
